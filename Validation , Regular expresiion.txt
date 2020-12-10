@@ -1,0 +1,51 @@
+1. *, which describes "0 or more occurrences", 
+
+e.g.:  go*  matches go, gone, good, guts
+ 
+2. +, which describes "1 or more occurrences", and
+
+e.g.:  go+  matches go, gone, good
+
+3. ?, which describes "0 or 1 occurrence".
+
+e.g.:  go?  matches go, gone, guts
+
+Above quantifiers always refer to the pattern immediately preceding (to the left of) the quantifier, which is normally a single character unless parentheses are used to create a pattern group.
+
+4. curly braces {} and number values for upper and lower occurrence limits within the braces.
+
+5. The | (pipe) metacharacter is used for alternation, essentially to specify 'this OR that' within a pattern. So something like a|b would match anything with an 'a' or a 'b' in it, and would be very similar to the character class [ab].
+
+6. the parentheses ( ) are used to group patterns.
+
+7. Character classes are a mini-language within regular expressions, defined by the enclosing hard braces [ ]. The hyphen character has special meaning within character classes, not within regular expressions (thus it doesn't qualify as a regular expression metacharacter, exactly), and it only has special meaning within a character class if it is not the first character. To specify any numeric digit using a hyphen, you would use [0-9]. Similarly for any lowercase letter, you could use [a-z], or for any uppercase letter [A-Z]. The range defined by the hyphen depends on the character set being used, so the order in which the characters occur in the (for example) ASCII or Unicode table determines which characters are included in the range.
+
+8. (?=...)	Positive Lookahead
+9. (?!...)	Negative Lookahead
+
+Assert a string is 8 or more characters:
+(?=.{8,})
+
+Assert a string contains at least 1 lowercase letter (zero or more characters followed by a lowercase character):
+(?=.*[a-z])
+
+Assert a string contains at least 1 uppercase letter (zero or more characters followed by an uppercase character):
+(?=.*[A-Z])
+
+Assert a string contains at least 1 digit:
+(?=.*[\d])
+
+Assert a string contains at least 1 special character:
+(?=.*[\W])
+
+Assert a string contains at least 1 special character or a digit:
+(?=.*[\d\W])
+
+((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}) (For a password having minimum one decimal number, one lower case
+letter, one upper case letter one special character as above and should be between 6 to 20 character long)
+
+For an e-mail
+
+\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*
+
+
